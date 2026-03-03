@@ -1,13 +1,11 @@
 {% extends view.base_template|default:"base.html" %}
 {% load lazycrud %}
+{% load static %}
+{% load i18n %}
 
 {% block js %}
 {{ block.super }}
-{% include "lazycrud/_datatables_js.html" %}
-{% endblock %}
-
-{% block css %}
-{% include "lazycrud/_datatables_css.html" %}
+<script src="{% static 'lazycrud/js/object_list.js' %}" defer></script>
 {% endblock %}
 
 {% block title %}{{ view.page_title }}{% endblock %}
@@ -33,9 +31,37 @@
 
 {% block pre_table %}{% endblock %}
 
+<div class="row mb-3 justify-content-end">
+    <div class="col-auto d-flex align-items-center">
+        {% if search_query %}
+        <small class="text-muted me-3">{{ paginator.count }} {% trans "results" %}</small>
+        {% endif %}
+        <form hx-get="{{ request.path }}"
+              hx-target="#htmx-table-results"
+              hx-push-url="true"
+              hx-trigger="submit, keyup changed delay:400ms from:input[name=q]"
+              hx-vals="js:{o: new URLSearchParams(window.location.search).get('o') || ''}">
+            <div class="input-group input-group-sm">
+                <input type="search"
+                       name="q"
+                       value="{{ search_query }}"
+                       class="form-control"
+                       style="width: 200px;"
+                       placeholder="{% trans 'Search...' %}"
+                       aria-label="{% trans 'Search' %}">
+                <button class="btn btn-outline-secondary" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-12">
-        {% include "lazycrud/_table.html" with table_classes=view.table_classes show_table_footer=view.show_table_footer object_model=view.model object_fields=view.fields object_list=object_list datatables_options=view.datatables_options object_url=view.detail_url object_url_target=view.detail_url_target object_actions=view.list_actions %}
+        <div id="htmx-table-results">
+            {% include "lazycrud/_htmx_table_partial.html" %}
+        </div>
     </div>
 </div>
 

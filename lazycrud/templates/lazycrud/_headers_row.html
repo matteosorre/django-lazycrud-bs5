@@ -7,7 +7,26 @@
     {% endfor %}
 {% else %}
     {% for name in object_fields %}
+        {% if orderable_fields and name in orderable_fields %}
+        <th class="sortable" style="white-space:nowrap;">
+            <a href="{% sort_url name %}"
+               hx-get="{% sort_url name %}"
+               hx-target="#htmx-table-results"
+               hx-push-url="true"
+               class="text-decoration-none text-reset d-inline-flex align-items-center gap-1">
+                {{ object_model|fieldlabel:name }}
+                {% if current_ordering == name %}
+                    <span>&#9650;</span>
+                {% elif current_ordering == "-"|add:name %}
+                    <span>&#9660;</span>
+                {% else %}
+                    <span class="text-muted opacity-50">&#8597;</span>
+                {% endif %}
+            </a>
+        </th>
+        {% else %}
         <th>{{ object_model|fieldlabel:name }}</th>
+        {% endif %}
     {% endfor %}
 {% endif %}
     {% if object_actions is not None %}

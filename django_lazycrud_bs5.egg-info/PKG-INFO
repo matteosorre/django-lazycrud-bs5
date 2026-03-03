@@ -1,0 +1,10 @@
+Metadata-Version: 2.1
+Name: django-lazycrud-bs5
+Version: 0.1.0
+Summary: A little Django app to reduce boilerplate code at a minimum when you write class based views in a typical CRUD scenario.
+Home-page: https://github.com/matteosorre/django-lazycrud-bs5
+Author: Matteo Sorrentino
+Author-email: mtsorre@gmail.com
+License: MIT
+Keywords: django,crud,bs5,bootstrap5
+License-File: LICENSE.txt

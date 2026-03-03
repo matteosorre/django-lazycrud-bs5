@@ -1,0 +1,6 @@
+{% load lazycrud %}
+{% load i18n %}
+
+{% include "lazycrud/_table.html" with table_classes=view.table_classes show_table_footer=view.show_table_footer object_model=view.model object_fields=view.fields object_list=object_list object_url=view.detail_url object_url_target=view.detail_url_target object_actions=view.list_actions %}
+
+{% include "lazycrud/_htmx_pagination.html" %}
