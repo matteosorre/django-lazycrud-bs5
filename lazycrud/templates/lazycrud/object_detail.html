@@ -7,7 +7,7 @@
 {% block content %}
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">
+        <h1 class="border-bottom pb-2">
         {% block page_header %}
             {{ object }}
         {% endblock page_header %}
@@ -16,7 +16,7 @@
 </div>
 <div class="row">
     <div class="col-lg-12">
-        <div class="pull-right">
+        <div class="float-end">
     {% block buttons %}
         {% if view.list_url %}
             <a class="btn btn-primary" role="button" href="{{ view.list_url }}"><i class="fa fa-angle-left"></i> {% trans 'Back to list' %}</a>
@@ -35,7 +35,7 @@
 <div class="row">
     {% block left_col %}
     <div class="{{ view.left_col_class|default:'col-md-6' }}">
-        <dl class="dl-horizontal">
+        <dl class="row">
         {% for name in view.fields %}
             {{ object|dl_item:name }}
         {% endfor %}

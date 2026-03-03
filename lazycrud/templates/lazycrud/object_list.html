@@ -15,13 +15,13 @@
 {% block content %}
 <div class="row">
     <div class="col-md-12">
-        <h1 class="page-header">{{ view.page_title }}</h1>
+        <h1 class="border-bottom pb-2">{{ view.page_title }}</h1>
     </div>
 </div>
 {% if view.create_url %}
 <div class="row">
     <div class="col-md-12">
-        <p class="pull-right">
+        <p class="float-end">
         {% block buttons %}
             <a class="btn btn-success" role="button" href="{{ view.create_url }}"><i class="fa fa-plus"></i> {{ view.create_label }}</a>
         {% endblock %}

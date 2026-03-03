@@ -44,7 +44,7 @@ def _get_label_value(obj, key, autoescape):
 def dl_item(obj, key, autoescape=None):
     try:
         label, value = _get_label_value(obj, key, autoescape)
-        result = '<dt>{}</dt><dd>{}</dd>'.format(label, value)
+        result = '<dt class="col-sm-4">{}</dt><dd class="col-sm-8">{}</dd>'.format(label, value)
     except:
         logger.exception(_('Error rendering the field %s') % key)
         result = '<dt></dt><dd></dd>'

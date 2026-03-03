@@ -5,14 +5,17 @@
 {% load i18n %}
 
 {% block js %}
-<script src="{% static 'lazycrud/js/moment/moment-with-locales.min.js' %}"></script>
-<script src="{% static 'lazycrud/js/bootstrap-datetimepicker/datetimepicker.min.js' %}"></script>
+<script src="{% static 'lazycrud/js/flatpickr/flatpickr.min.js' %}"></script>
+<script src="{% static 'lazycrud/js/flatpickr/l10n/it.js' %}"></script>
+<script src="{% static 'lazycrud/js/flatpickr/l10n/de.js' %}"></script>
+<script src="{% static 'lazycrud/js/flatpickr/l10n/fr.js' %}"></script>
+<script src="{% static 'lazycrud/js/flatpickr/l10n/es.js' %}"></script>
 <script src="{% static 'lazycrud/js/object_form.js' %}"></script>
 {{ form.media.js }}
 {% endblock %}
 
 {% block css %}
-<link href="{% static 'lazycrud/css/datetimepicker.min.css' %}" rel="stylesheet">
+<link href="{% static 'lazycrud/css/flatpickr.min.css' %}" rel="stylesheet">
 {{ form.media.css }}
 {% endblock %}
 
@@ -22,23 +25,23 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h1 class="page-header">{{ view.form_title }}</h1>
-    </div> <!-- /.col-lg-12 -->
-</div> <!-- /.row -->
+        <h1 class="border-bottom pb-2">{{ view.form_title }}</h1>
+    </div>
+</div>
 
 {% if not view.hide_back %}
     <div class="row">
         <div class="col-md-12">
         {% if view.back_url %}
-            <a class="btn btn-primary pull-right" role="button" href="{{ view.back_url }}">
+            <a class="btn btn-primary float-end" role="button" href="{{ view.back_url }}">
                 <i class="fa fa-angle-left"></i> {% trans 'Back' %}
             </a>
         {% elif form.instance.pk %}
-            <a class="btn btn-primary pull-right" role="button" href="{{ form.instance.get_absolute_url }}">
+            <a class="btn btn-primary float-end" role="button" href="{{ form.instance.get_absolute_url }}">
                 <i class="fa fa-angle-left"></i> {% trans 'Back to' %} {{ form.instance }}
             </a>
         {% else %}
-            <a class="btn btn-primary pull-right" role="button" href="javascript:history.back();">
+            <a class="btn btn-primary float-end" role="button" href="javascript:history.back();">
                 <i class="fa fa-angle-left"></i> {% trans 'Back' %}
             </a>
         {% endif %}
@@ -50,13 +53,13 @@
 <div class="row">
     <div class="col-md-12">
         {% if view.form_description %}
-            <div class="well">
+            <div class="p-3 bg-light rounded">
                 {{ view.form_description|safe|linebreaks }}
             </div>
         {% endif %}
         {% if form.errors %}
-            <div class="alert alert-danger alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 {% trans 'There is some error in the form, check the red fields' %}
                 <ul>
                 {% for error_key, error_value in form.errors.items %}
@@ -73,20 +76,20 @@
 <div class="row">
     <div class="col-md-12">
     {% block form_content %}
-        <form class="form-horizontal" role="form" method="POST" action="" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>
+        <form role="form" method="POST" action="" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>
         {% if form.helper == None %}
             {% crispy form form_horizontal_helper %}
         {% else %}
             {% crispy form %}
         {% endif %}
             <div class="form-actions">
-                <div class="col-lg-8 col-lg-offset-4">
+                <div class="col-lg-8 offset-lg-4">
                     <input type="submit" name="submit" value="{{ view.submit_text|default:_('Save') }}" class="btn btn-primary" id="submit-save">
                 </div>
             </div>
         </form>
     {% endblock %}
-    </div> <!-- /.col-lg-12 -->
-</div> <!-- /.row -->
+    </div>
+</div>
 
 {% endblock %}
