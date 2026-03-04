@@ -22,7 +22,7 @@
             {% for name in object_fields %}
                 <td>{{ o|fieldvalue:name }}</td>
             {% endfor %}
-            {% if object_actions is not None %}
+            {% if object_actions %}
                 <td class="actions">
                 {% for action in object_actions %}
                     <a class="btn btn-link" href="{% url action.url pk=o.pk %}">{% if action.icon %}<i class="fa fa-{{ action.icon }}"></i> {% endif %}{{ action.label }}</a>

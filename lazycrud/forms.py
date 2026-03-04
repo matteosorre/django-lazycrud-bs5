@@ -65,9 +65,10 @@ class GroupedModelMultiChoiceField(Grouped, ModelMultipleChoiceField):
 def get_form_horizontal_helper():
     helper = FormHelper()
     helper.form_tag = False
-    helper.label_class = 'col-lg-4 col-form-label'
+    helper.label_class = 'col-lg-4 col-form-label text-lg-end'
     helper.field_class = 'col-lg-8'
     helper.include_media = False
+    helper.form_class = 'form-horizontal'
     return helper
 
 def get_table_inline_formset_helper():

@@ -77,7 +77,7 @@
     <div class="col-md-12">
     {% block form_content %}
         <form role="form" method="POST" action="" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>
-        {% if form.helper == None %}
+        {% if not form.helper %}
             {% crispy form form_horizontal_helper %}
         {% else %}
             {% crispy form %}
