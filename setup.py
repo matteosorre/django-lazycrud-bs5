@@ -14,6 +14,6 @@ setup(
     zip_safe=False,
     install_requires=[
         'django-crispy-forms>=2.0',
-        'crispy-bootstrap5>=2024.1',
+        'crispy-bootstrap5>=2026.3',
     ]
 )
