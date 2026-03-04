@@ -33,9 +33,6 @@
 
 <div class="row mb-3 justify-content-end">
     <div class="col-auto d-flex align-items-center">
-        {% if search_query %}
-        <small class="text-muted me-3">{{ paginator.count }} {% trans "results" %}</small>
-        {% endif %}
         <form hx-get="{{ request.path }}"
               hx-target="#htmx-table-results"
               hx-push-url="true"
