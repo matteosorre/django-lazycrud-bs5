@@ -23,72 +23,64 @@
 
 {% block content %}
 
-<div class="row">
-    <div class="col-md-12">
-        <h1 class="border-bottom pb-2">{{ view.form_title }}</h1>
-    </div>
-</div>
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-xl-7">
+        <div class="card shadow-sm">
 
-{% if not view.hide_back %}
-    <div class="row">
-        <div class="col-md-12">
-        {% if view.back_url %}
-            <a class="btn btn-primary float-end" role="button" href="{{ view.back_url }}">
-                <i class="fa fa-angle-left"></i> {% trans 'Back' %}
-            </a>
-        {% elif form.instance.pk %}
-            <a class="btn btn-primary float-end" role="button" href="{{ form.instance.get_absolute_url }}">
-                <i class="fa fa-angle-left"></i> {% trans 'Back to' %} {{ form.instance }}
-            </a>
-        {% else %}
-            <a class="btn btn-primary float-end" role="button" href="javascript:history.back();">
-                <i class="fa fa-angle-left"></i> {% trans 'Back' %}
-            </a>
-        {% endif %}
-        </div>
-    </div>
-    <hr>
-{% endif %}
-
-<div class="row">
-    <div class="col-md-12">
-        {% if view.form_description %}
-            <div class="p-3 bg-light rounded">
-                {{ view.form_description|safe|linebreaks }}
-            </div>
-        {% endif %}
-        {% if form.errors %}
-            <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                {% trans 'There is some error in the form, check the red fields' %}
-                <ul>
-                {% for error_key, error_value in form.errors.items %}
-                    {% if error_key != '__all__' %}
-                        <li>{{ form|formfieldlabel:error_key }}: {{ error_value }}</li>
+            <div class="card-header d-flex align-items-center justify-content-between py-3">
+                <h5 class="mb-0">{{ view.form_title }}</h5>
+                {% if not view.hide_back %}
+                    {% if view.back_url %}
+                        <a class="btn btn-outline-secondary btn-sm ms-auto" role="button" href="{{ view.back_url }}">
+                            <i class="bi bi-arrow-left"></i> {% trans 'Back' %}
+                        </a>
+                    {% elif form.instance.pk %}
+                        <a class="btn btn-outline-secondary btn-sm ms-auto" role="button" href="{{ form.instance.get_absolute_url }}">
+                            <i class="bi bi-arrow-left"></i> {% trans 'Back to' %} {{ form.instance }}
+                        </a>
+                    {% else %}
+                        <a class="btn btn-outline-secondary btn-sm ms-auto" role="button" href="javascript:history.back();">
+                            <i class="bi bi-arrow-left"></i> {% trans 'Back' %}
+                        </a>
                     {% endif %}
-                {% endfor %}
-                </ul>
+                {% endif %}
             </div>
-        {% endif %}
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-md-12">
-    {% block form_content %}
-        <form role="form" method="POST" action="" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>
-        {% if not form.helper %}
-            {% crispy form form_horizontal_helper %}
-        {% else %}
-            {% crispy form %}
-        {% endif %}
-            <div class="form-actions">
-                <div class="col-lg-8 offset-lg-4">
-                    <input type="submit" name="submit" value="{{ view.submit_text|default:_('Save') }}" class="btn btn-primary" id="submit-save">
-                </div>
+            <div class="card-body p-4">
+                {% if view.form_description %}
+                    <div class="alert alert-info mb-3">
+                        {{ view.form_description|safe|linebreaks }}
+                    </div>
+                {% endif %}
+                {% if form.errors %}
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        {% trans 'There is some error in the form, check the red fields' %}
+                        <ul>
+                        {% for error_key, error_value in form.errors.items %}
+                            {% if error_key != '__all__' %}
+                                <li>{{ form|formfieldlabel:error_key }}: {{ error_value }}</li>
+                            {% endif %}
+                        {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                {% block form_content %}
+                    <form role="form" method="POST" action="" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>
+                    {% if not form.helper %}
+                        {% crispy form form_horizontal_helper %}
+                    {% else %}
+                        {% crispy form %}
+                    {% endif %}
+                        <div class="form-actions d-flex justify-content-end mt-3">
+                            <input type="submit" name="submit" value="{{ view.submit_text|default:_('Save') }}" class="btn btn-primary" id="submit-save">
+                        </div>
+                    </form>
+                {% endblock %}
             </div>
-        </form>
-    {% endblock %}
+
+        </div>
     </div>
 </div>
 
