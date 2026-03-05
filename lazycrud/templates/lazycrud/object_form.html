@@ -15,6 +15,7 @@
 {% endblock %}
 
 {% block css %}
+<link href="{% static 'lazycrud/css/lazycrud.css' %}" rel="stylesheet">
 <link href="{% static 'lazycrud/css/flatpickr.min.css' %}" rel="stylesheet">
 {{ form.media.css }}
 {% endblock %}
@@ -32,15 +33,15 @@
                 {% if not view.hide_back %}
                     {% if view.back_url %}
                         <a class="btn btn-outline-secondary btn-sm ms-auto" role="button" href="{{ view.back_url }}">
-                            <i class="bi bi-arrow-left"></i> {% trans 'Back' %}
+                            <i class="bi bi-arrow-left"></i> <span class="btn-label">{% trans 'Back' %}</span>
                         </a>
                     {% elif form.instance.pk %}
                         <a class="btn btn-outline-secondary btn-sm ms-auto" role="button" href="{{ form.instance.get_absolute_url }}">
-                            <i class="bi bi-arrow-left"></i> {% trans 'Back to' %} {{ form.instance }}
+                            <i class="bi bi-arrow-left"></i> <span class="btn-label">{% trans 'Back to' %} {{ form.instance }}</span>
                         </a>
                     {% else %}
                         <a class="btn btn-outline-secondary btn-sm ms-auto" role="button" href="javascript:history.back();">
-                            <i class="bi bi-arrow-left"></i> {% trans 'Back' %}
+                            <i class="bi bi-arrow-left"></i> <span class="btn-label">{% trans 'Back' %}</span>
                         </a>
                     {% endif %}
                 {% endif %}

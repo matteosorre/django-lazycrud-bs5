@@ -28,10 +28,10 @@
                     <a class="btn btn-link" href="{% url action.url pk=o.pk %}">{% if action.icon %}<i class="fa fa-{{ action.icon }}"></i> {% endif %}{{ action.label }}</a>
                 {% endfor %}
                 {% if o.get_update_url %}
-                    <a class="btn btn-link" href="{{ o.get_update_url }}"><i class="fa fa-edit"></i> {% trans "Edit" %}</a>
+                    <a class="btn btn-link" href="{{ o.get_update_url }}"><i class="bi bi-pencil"></i> {% trans "Edit" %}</a>
                 {% endif %}
                 {% if o.get_delete_url %}
-                    <a class="btn btn-link" href="{{ o.get_delete_url }}"><i class="fa fa-times"></i> {% trans "Delete" %}</a>
+                    <a class="btn btn-link" href="{{ o.get_delete_url }}"><i class="bi bi-trash"></i> {% trans "Delete" %}</a>
                 {% endif %}
                 </td>
             {% endif %}

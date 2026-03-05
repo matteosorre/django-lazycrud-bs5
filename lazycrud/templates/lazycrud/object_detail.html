@@ -1,47 +1,55 @@
 {% extends view.base_template|default:"base.html" %}
 {% load i18n %}
 {% load lazycrud %}
+{% load static %}
+
+{% block css %}
+{{ block.super }}
+<link href="{% static 'lazycrud/css/lazycrud.css' %}" rel="stylesheet">
+<link href="{% static 'lazycrud/css/object_detail.css' %}" rel="stylesheet">
+{% endblock css %}
 
 {% block title %}{{ object }}{% endblock %}
 
 {% block content %}
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="border-bottom pb-2">
-        {% block page_header %}
-            {{ object }}
-        {% endblock page_header %}
-        </h1>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="float-end">
-    {% block buttons %}
-        {% if view.list_url %}
-            <a class="btn btn-primary" role="button" href="{{ view.list_url }}"><i class="fa fa-angle-left"></i> {% trans 'Back to list' %}</a>
-        {% endif %}
-        {% if view.update_url %}
-            <a class="btn btn-warning" role="button" href="{% url view.update_url pk=object.pk %}"><i class="fa fa-edit"></i> {% trans 'Edit' %}</a>
-        {% endif %}
-        {% if view.delete_url %}
-            <a class="btn btn-danger" role="button" href="{% url view.delete_url pk=object.pk %}"><i class="fa fa-times"></i> {% trans 'Delete' %}</a>
-        {% endif %}
-    {% endblock %}
+        <div class="card shadow-sm overflow-hidden">
+            <div class="card-header d-flex align-items-center">
+                <h5 class="mb-0">
+                {% block page_header %}
+                    {{ object }}
+                {% endblock page_header %}
+                </h5>
+                <div class="d-flex gap-2 ms-auto">
+                {% block buttons %}
+                    {% if view.list_url %}
+                        <a class="btn btn-sm btn-outline-secondary" role="button" href="{{ view.list_url }}"><i class="bi bi-arrow-left"></i> <span class="btn-label">{% trans 'Back to list' %}</span></a>
+                    {% endif %}
+                    {% if view.update_url %}
+                        <a class="btn btn-sm btn-warning" role="button" href="{% url view.update_url pk=object.pk %}"><i class="bi bi-pencil"></i> <span class="btn-label">{% trans 'Edit' %}</span></a>
+                    {% endif %}
+                    {% if view.delete_url %}
+                        <a class="btn btn-sm btn-danger" role="button" href="{% url view.delete_url pk=object.pk %}"><i class="bi bi-trash"></i> <span class="btn-label">{% trans 'Delete' %}</span></a>
+                    {% endif %}
+                {% endblock %}
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="row g-0">
+                    {% block left_col %}
+                    <div class="{{ view.left_col_class|default:'col-md-12' }}">
+                        <dl class="row mb-0 lazycrud-dl">
+                        {% for name in view.fields %}
+                            {{ object|dl_item:name }}
+                        {% endfor %}
+                        </dl>
+                    </div>
+                    {% endblock %}
+                    {% block right_col %}{% endblock %}
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<hr>
-<div class="row">
-    {% block left_col %}
-    <div class="{{ view.left_col_class|default:'col-md-6' }}">
-        <dl class="row">
-        {% for name in view.fields %}
-            {{ object|dl_item:name }}
-        {% endfor %}
-        </dl>
-    </div>
-    {% endblock %}
-    {% block right_col %}{% endblock %}
 </div>
 {% endblock %}

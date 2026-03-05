@@ -3,6 +3,12 @@
 {% load static %}
 {% load i18n %}
 
+{% block css %}
+{{ block.super }}
+<link href="{% static 'lazycrud/css/lazycrud.css' %}" rel="stylesheet">
+<link href="{% static 'lazycrud/css/object_list.css' %}" rel="stylesheet">
+{% endblock css %}
+
 {% block js %}
 {{ block.super }}
 <script src="{% static 'lazycrud/js/object_list.js' %}" defer></script>
@@ -21,7 +27,7 @@
     <div class="col-md-12">
         <p class="float-end">
         {% block buttons %}
-            <a class="btn btn-success" role="button" href="{{ view.create_url }}"><i class="fa fa-plus"></i> {{ view.create_label }}</a>
+            <a class="btn btn-success" role="button" href="{{ view.create_url }}"><i class="bi bi-plus-lg"></i> <span class="btn-label">{{ view.create_label }}</span></a>
         {% endblock %}
         </p>
     </div>

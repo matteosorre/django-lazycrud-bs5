@@ -1,0 +1,4 @@
+/* Testo bottoni: visibile da sm in su */
+@media (max-width: 575.98px) {
+    .btn .btn-label { display: none; }
+}

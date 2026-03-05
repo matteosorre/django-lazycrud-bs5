@@ -1,0 +1,35 @@
+/* Separatori di riga */
+.lazycrud-dl dt,
+.lazycrud-dl dd {
+    padding: 0.6rem 1rem;
+    margin: 0;
+    border-bottom: 1px solid var(--bs-border-color, #dee2e6);
+}
+
+/* Label: piccola, muted, uppercase */
+.lazycrud-dl dt {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--bs-secondary-color, #6c757d);
+}
+
+/* Righe alternate */
+.lazycrud-dl dt:nth-of-type(odd),
+.lazycrud-dl dt:nth-of-type(odd) + dd {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Hover sulla riga */
+.lazycrud-dl dt:hover,
+.lazycrud-dl dt:hover + dd,
+.lazycrud-dl dd:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Rimuovi border sull'ultima coppia */
+.lazycrud-dl dt:last-of-type,
+.lazycrud-dl dd:last-of-type {
+    border-bottom: none;
+}
