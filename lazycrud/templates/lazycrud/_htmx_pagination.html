@@ -1,0 +1,46 @@
+{% load lazycrud %}
+{% load i18n %}
+
+{% if page_obj.has_other_pages %}
+<ul class="pagination pagination-sm m-0 float-end">
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+        <a class="page-link"
+           href="{% query_string page=page_obj.previous_page_number %}"
+           hx-get="{% query_string page=page_obj.previous_page_number %}"
+           hx-target="#htmx-table-results"
+           hx-push-url="true"
+           aria-label="{% trans 'Previous' %}">&#171;</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+        <span class="page-link">&#171;</span>
+    </li>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+        <a class="page-link"
+           href="{% query_string page=num %}"
+           hx-get="{% query_string page=num %}"
+           hx-target="#htmx-table-results"
+           hx-push-url="true">{{ num }}</a>
+    </li>
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+    <li class="page-item">
+        <a class="page-link"
+           href="{% query_string page=page_obj.next_page_number %}"
+           hx-get="{% query_string page=page_obj.next_page_number %}"
+           hx-target="#htmx-table-results"
+           hx-push-url="true"
+           aria-label="{% trans 'Next' %}">&#187;</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+        <span class="page-link">&#187;</span>
+    </li>
+    {% endif %}
+</ul>
+{% endif %}

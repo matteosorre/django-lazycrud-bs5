@@ -1,8 +1,7 @@
 {% load lazycrud %}
 {% load i18n %}
 
-<table class="table {% if table_classes %}{{ table_classes }}{% else %}table-striped table-hover table-datatables{% endif %}"
-    {% if datatables_options %} data-datatables-options="{{ datatables_options }}"{% endif %}>
+<table class="table {% if table_classes %}{{ table_classes }}{% else %}table-striped table-hover{% endif %}">
     <thead>
         {% include "lazycrud/_headers_row.html" %}
     </thead>
@@ -23,19 +22,25 @@
             {% for name in object_fields %}
                 <td>{{ o|fieldvalue:name }}</td>
             {% endfor %}
-            {% if object_actions is not None %}
+            {% if object_actions %}
                 <td class="actions">
                 {% for action in object_actions %}
                     <a class="btn btn-link" href="{% url action.url pk=o.pk %}">{% if action.icon %}<i class="fa fa-{{ action.icon }}"></i> {% endif %}{{ action.label }}</a>
                 {% endfor %}
                 {% if o.get_update_url %}
-                    <a class="btn btn-link" href="{{ o.get_update_url }}"><i class="fa fa-edit"></i> {% trans "Edit" %}</a>
+                    <a class="btn btn-link" href="{{ o.get_update_url }}"><i class="bi bi-pencil"></i> {% trans "Edit" %}</a>
                 {% endif %}
                 {% if o.get_delete_url %}
-                    <a class="btn btn-link" href="{{ o.get_delete_url }}"><i class="fa fa-times"></i> {% trans "Delete" %}</a>
+                    <a class="btn btn-link" href="{{ o.get_delete_url }}"><i class="bi bi-trash"></i> {% trans "Delete" %}</a>
                 {% endif %}
                 </td>
             {% endif %}
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="100" class="text-center text-muted">
+                    {% trans "No results found." %}
+                </td>
             </tr>
         {% endfor %}
     </tbody>

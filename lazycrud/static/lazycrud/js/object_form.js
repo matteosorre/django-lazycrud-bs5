@@ -1,38 +1,36 @@
 function lazycrud_form_init(form_id) {
-    var lang = $('html').attr('lang');
+    var lang = document.documentElement.lang || 'default';
+    var locale = (flatpickr.l10ns && flatpickr.l10ns[lang]) || flatpickr.l10ns.default;
 
-    var datetimepicker_icons = {
-        time: "fa fa-clock-o",
-        date: "fa fa-calendar",
-        previous: "fa fa-chevron-left",
-        next: "fa fa-chevron-right",
-        up: "fa fa-chevron-circle-up",
-        down: "fa fa-chevron-circle-down",
-        close: "fa fa-times",
-    };
+    var container = document.querySelector(form_id);
+    if (!container) return;
 
-    $(form_id + ' .dateinput').datetimepicker({
-        format: 'L',
-        locale: lang,
-        icons: datetimepicker_icons,
+    container.querySelectorAll('.dateinput').forEach(function(el) {
+        flatpickr(el, { locale: locale, dateFormat: 'Y-m-d', allowInput: true });
     });
-
-    $(form_id + ' .timeinput').datetimepicker({
-        format: 'LT',
-        locale: lang,
-        icons: datetimepicker_icons,
-        stepping: 15,
+    container.querySelectorAll('.timeinput').forEach(function(el) {
+        flatpickr(el, {
+            locale: locale,
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: 'H:i',
+            time_24hr: true,
+            minuteIncrement: 15,
+            allowInput: true,
+        });
     });
-
-    $(form_id + ' .datetimeinput').datetimepicker({
-        format: 'L LT',
-        locale: lang,
-        icons: datetimepicker_icons,
-        stepping: 15,
-        showClose: true,
+    container.querySelectorAll('.datetimeinput').forEach(function(el) {
+        flatpickr(el, {
+            locale: locale,
+            enableTime: true,
+            dateFormat: 'Y-m-d H:i',
+            time_24hr: true,
+            minuteIncrement: 15,
+            allowInput: true,
+        });
     });
 }
 
-$(function() {
+document.addEventListener('DOMContentLoaded', function() {
     lazycrud_form_init('form');
 });

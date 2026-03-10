@@ -44,7 +44,7 @@ def _get_label_value(obj, key, autoescape):
 def dl_item(obj, key, autoescape=None):
     try:
         label, value = _get_label_value(obj, key, autoescape)
-        result = '<dt>{}</dt><dd>{}</dd>'.format(label, value)
+        result = '<dt class="col-sm-4">{}</dt><dd class="col-sm-8">{}</dd>'.format(label, value)
     except:
         logger.exception(_('Error rendering the field %s') % key)
         result = '<dt></dt><dd></dd>'
@@ -61,3 +61,27 @@ def tr_item(obj, key, autoescape=None):
     label, value = _get_label_value(obj, key, autoescape)
     result = u'<tr><td class="lazycrud-label">{}</td><td class="lazycrud-value">{}</td></tr>'.format(label, value)
     return mark_safe(result)
+
+
+@register.simple_tag(takes_context=True)
+def sort_url(context, field_name):
+    """Build a sort URL toggling asc/desc for the given field, resetting pagination."""
+    request = context['request']
+    params = request.GET.copy()
+    current = params.get('o', '')
+    params['o'] = f'-{field_name}' if current == field_name else field_name
+    params.pop('page', None)
+    return f'?{params.urlencode()}'
+
+
+@register.simple_tag(takes_context=True)
+def query_string(context, **kwargs):
+    """Return current query string with the given params overridden."""
+    request = context['request']
+    params = request.GET.copy()
+    for key, value in kwargs.items():
+        if value is None:
+            params.pop(key, None)
+        else:
+            params[key] = value
+    return f'?{params.urlencode()}'
