@@ -59,6 +59,7 @@
       scrollTitle: "Scrolla per aumentare",
       toggleTitle: "Clicca per cambiare",
       time_24hr: true,
+      dateFormat: "d/m/Y",
   };
   fp.l10ns.it = Italian;
   var it = fp.l10ns;

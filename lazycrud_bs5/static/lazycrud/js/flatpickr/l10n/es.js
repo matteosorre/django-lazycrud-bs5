@@ -58,6 +58,7 @@
       firstDayOfWeek: 1,
       rangeSeparator: " a ",
       time_24hr: true,
+      dateFormat: "d/m/Y",
   };
   fp.l10ns.es = Spanish;
   var es = fp.l10ns;

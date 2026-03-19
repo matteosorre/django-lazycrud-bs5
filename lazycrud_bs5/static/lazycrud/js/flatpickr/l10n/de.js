@@ -58,6 +58,7 @@
       scrollTitle: "Zum Ändern scrollen",
       toggleTitle: "Zum Umschalten klicken",
       time_24hr: true,
+      dateFormat: "d.m.Y",
   };
   fp.l10ns.de = German;
   var de = fp.l10ns;

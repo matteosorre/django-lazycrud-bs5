@@ -1,14 +1,17 @@
-function lazycrud_form_init(form_id) {
+function lazycrud_form_init() {
     var lang = document.documentElement.lang || 'default';
     var locale = (flatpickr.l10ns && flatpickr.l10ns[lang]) || flatpickr.l10ns.default;
 
-    var container = document.querySelector(form_id);
-    if (!container) return;
-
-    container.querySelectorAll('.dateinput').forEach(function(el) {
-        flatpickr(el, { locale: locale, dateFormat: 'Y-m-d', allowInput: true });
+    document.querySelectorAll('.dateinput').forEach(function(el) {
+        flatpickr(el, {
+            locale: locale,
+            dateFormat: 'Y-m-d',
+            altInput: true,
+            altFormat: locale.dateFormat || 'Y-m-d',
+            allowInput: true,
+        });
     });
-    container.querySelectorAll('.timeinput').forEach(function(el) {
+    document.querySelectorAll('.timeinput').forEach(function(el) {
         flatpickr(el, {
             locale: locale,
             enableTime: true,
@@ -19,7 +22,7 @@ function lazycrud_form_init(form_id) {
             allowInput: true,
         });
     });
-    container.querySelectorAll('.datetimeinput').forEach(function(el) {
+    document.querySelectorAll('.datetimeinput').forEach(function(el) {
         flatpickr(el, {
             locale: locale,
             enableTime: true,
@@ -31,6 +34,4 @@ function lazycrud_form_init(form_id) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    lazycrud_form_init('form');
-});
+document.addEventListener('DOMContentLoaded', lazycrud_form_init);

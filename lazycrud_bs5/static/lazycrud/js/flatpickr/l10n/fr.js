@@ -63,6 +63,7 @@
       scrollTitle: "Défiler pour augmenter la valeur",
       toggleTitle: "Cliquer pour basculer",
       time_24hr: true,
+      dateFormat: "d/m/Y",
   };
   fp.l10ns.fr = French;
   var fr = fp.l10ns;
