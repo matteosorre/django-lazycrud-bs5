@@ -69,6 +69,7 @@
       toggleTitle: "Click to toggle",
       time_24hr: false,
       dateFormat: "m/d/Y",
+      dateTimeFormat: "m/d/Y h:i K",
   };
   fp.l10ns.en = English;
   var en = fp.l10ns;

@@ -64,6 +64,7 @@
       toggleTitle: "Cliquer pour basculer",
       time_24hr: true,
       dateFormat: "d/m/Y",
+      dateTimeFormat: "d/m/Y H:i",
   };
   fp.l10ns.fr = French;
   var fr = fp.l10ns;

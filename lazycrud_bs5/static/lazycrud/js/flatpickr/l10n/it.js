@@ -60,6 +60,7 @@
       toggleTitle: "Clicca per cambiare",
       time_24hr: true,
       dateFormat: "d/m/Y",
+      dateTimeFormat: "d/m/Y H:i",
   };
   fp.l10ns.it = Italian;
   var it = fp.l10ns;

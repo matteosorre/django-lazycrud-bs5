@@ -59,6 +59,7 @@
       rangeSeparator: " a ",
       time_24hr: true,
       dateFormat: "d/m/Y",
+      dateTimeFormat: "d/m/Y H:i",
   };
   fp.l10ns.es = Spanish;
   var es = fp.l10ns;

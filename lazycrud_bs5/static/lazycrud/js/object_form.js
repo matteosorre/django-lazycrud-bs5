@@ -27,6 +27,8 @@ function lazycrud_form_init() {
             locale: locale,
             enableTime: true,
             dateFormat: 'Y-m-d H:i',
+            altInput: true,
+            altFormat: locale.dateTimeFormat || 'Y-m-d H:i',
             time_24hr: true,
             minuteIncrement: 15,
             allowInput: true,
