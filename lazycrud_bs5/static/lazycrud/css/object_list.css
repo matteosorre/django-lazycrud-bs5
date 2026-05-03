@@ -1,3 +1,7 @@
 .clickable_row {
     cursor: pointer;
 }
+
+.lazycrud-table-col {
+    min-width: 0;
+}
